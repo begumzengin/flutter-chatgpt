@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_chatgpt/constants/constants.dart';
+import 'package:flutter_chatgpt/services/services.dart';
 import 'package:flutter_chatgpt/widgets/chat_widget.dart';
 import 'package:flutter_chatgpt/widgets/text_widget.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
@@ -45,27 +46,7 @@ class _ChatScreenState extends State<ChatScreen> {
           actions: [
             IconButton(
                 onPressed: () async {
-                  await showModalBottomSheet(
-                      shape: const RoundedRectangleBorder(
-                          borderRadius: BorderRadius.vertical(
-                        top: Radius.circular(20),
-                      )),
-                      backgroundColor: scaffoldBackgroundColor,
-                      context: context,
-                      builder: (context) {
-                        return Padding(
-                          padding: const EdgeInsets.all(18.0),
-                          child: Row(
-                            children: [
-                              const Flexible(
-                                  child: TextWidget(
-                                label: "Chosen Model:",
-                                fontSize: 16,
-                              ))
-                            ],
-                          ),
-                        );
-                      });
+                  await Services.showModalSheet(context: context);
                 },
                 icon: Icon(
                   Icons.more_vert_rounded,
