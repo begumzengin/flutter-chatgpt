@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_chatgpt/constants/constants.dart';
+import 'package:flutter_chatgpt/services/api_service.dart';
 import 'package:flutter_chatgpt/services/services.dart';
 import 'package:flutter_chatgpt/widgets/chat_widget.dart';
 import 'package:flutter_chatgpt/widgets/text_widget.dart';
@@ -92,7 +93,13 @@ class _ChatScreenState extends State<ChatScreen> {
                         ),
                       ),
                       IconButton(
-                          onPressed: () {},
+                          onPressed: () async {
+                            try {
+                              await ApiService.getModels();
+                            } catch (e) {
+                              print("error $e");
+                            }
+                          },
                           icon: Icon(
                             Icons.send,
                             color: Colors.white,
