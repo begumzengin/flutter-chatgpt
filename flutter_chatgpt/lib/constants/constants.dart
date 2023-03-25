@@ -29,6 +29,7 @@ List<DropdownMenuItem<String>>? get getModelsItem {
 }
 */
 
+/*
 final chatMessages = [
   {
     "msg": "Hello who are you?",
@@ -58,3 +59,4 @@ final chatMessages = [
     "chatIndex": 1,
   },
 ];
+*/
