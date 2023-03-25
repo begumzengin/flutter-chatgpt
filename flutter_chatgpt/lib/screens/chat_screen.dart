@@ -140,6 +140,15 @@ class _ChatScreenState extends State<ChatScreen> {
   Future<void> sendMessageFCT(
       {required ModelsProvider modelsProvider,
       required ChatProvider chatProvider}) async {
+    if (textEditingController.text.isEmpty) {
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+        content: TextWidget(
+          label: "Please type a message",
+        ),
+        backgroundColor: Colors.red,
+      ));
+      return;
+    }
     try {
       setState(() {
         _isTyping = true;
@@ -160,6 +169,12 @@ class _ChatScreenState extends State<ChatScreen> {
       setState(() {});
     } catch (e) {
       log("error $e");
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+        content: TextWidget(
+          label: e.toString(),
+        ),
+        backgroundColor: Colors.red,
+      ));
     } finally {
       setState(() {
         scrollListToEnd();
