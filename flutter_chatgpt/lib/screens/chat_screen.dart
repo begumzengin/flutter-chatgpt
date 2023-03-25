@@ -24,12 +24,13 @@ class ChatScreen extends StatefulWidget {
 
 class _ChatScreenState extends State<ChatScreen> {
   bool _isTyping = false;
-
+  late ScrollController _listScrollController;
   late TextEditingController textEditingController;
   late FocusNode focusNode;
 
   @override
   void initState() {
+    _listScrollController = ScrollController();
     textEditingController = TextEditingController();
     focusNode = FocusNode();
     super.initState();
@@ -39,6 +40,7 @@ class _ChatScreenState extends State<ChatScreen> {
   void dispose() {
     textEditingController.dispose();
     focusNode.dispose();
+    _listScrollController.dispose();
     super.dispose();
   }
 
@@ -70,6 +72,7 @@ class _ChatScreenState extends State<ChatScreen> {
             child: Column(children: [
           Flexible(
             child: ListView.builder(
+                controller: _listScrollController,
                 itemCount: chatList.length,
                 itemBuilder: (context, index) {
                   return ChatWidget(
@@ -118,6 +121,13 @@ class _ChatScreenState extends State<ChatScreen> {
         ])));
   }
 
+  void scrollListToEnd() {
+    _listScrollController.animateTo(
+        _listScrollController.position.maxScrollExtent,
+        duration: Duration(seconds: 2),
+        curve: Curves.easeOut);
+  }
+
   Future<void> sendMessageFCT({required ModelsProvider modelsProvider}) async {
     try {
       setState(() {
@@ -135,6 +145,7 @@ class _ChatScreenState extends State<ChatScreen> {
       log("error $e");
     } finally {
       setState(() {
+        scrollListToEnd();
         _isTyping = false;
       });
     }
