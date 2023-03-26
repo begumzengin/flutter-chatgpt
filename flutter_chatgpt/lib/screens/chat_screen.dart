@@ -1,18 +1,14 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_chatgpt/constants/constants.dart';
 import 'package:flutter_chatgpt/providers/models_provider.dart';
-import 'package:flutter_chatgpt/services/api_service.dart';
 import 'package:flutter_chatgpt/services/services.dart';
 import 'package:flutter_chatgpt/widgets/chat_widget.dart';
 import 'package:flutter_chatgpt/widgets/text_widget.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:provider/provider.dart';
 
-import '../models/chat_model.dart';
 import '../providers/chats_provider.dart';
 import '../services/assets_manager.dart';
 
@@ -52,13 +48,18 @@ class _ChatScreenState extends State<ChatScreen> {
     final modelsProvider = Provider.of<ModelsProvider>(context);
     final chatProvider = Provider.of<ChatProvider>(context);
     return Scaffold(
+        backgroundColor: fadedDenim,
         appBar: AppBar(
-          elevation: 2,
+          elevation: 1,
+          backgroundColor: classicBlue,
           leading: Padding(
             padding: const EdgeInsets.all(8.0),
-            child: Image.asset(AssetsManager.openaiLogo),
+            child: Image.asset(AssetsManager.chatghostLogo),
           ),
-          title: Text("ChatGPT"),
+          title: Text(
+            "cutebot",
+            style: TextStyle(letterSpacing: 3),
+          ),
           actions: [
             IconButton(
                 onPressed: () async {
@@ -93,7 +94,7 @@ class _ChatScreenState extends State<ChatScreen> {
             ),
           ],
           Material(
-            color: cardColor,
+            color: Color(0xFF1B2631),
             child: Padding(
               padding: const EdgeInsets.all(8.0),
               child: Row(
@@ -109,7 +110,7 @@ class _ChatScreenState extends State<ChatScreen> {
                             chatProvider: chatProvider);
                       },
                       decoration: const InputDecoration.collapsed(
-                          hintText: "How can I help you?",
+                          hintText: "how can i help you?",
                           hintStyle: TextStyle(color: Colors.grey)),
                     ),
                   ),
@@ -121,7 +122,7 @@ class _ChatScreenState extends State<ChatScreen> {
                       },
                       icon: Icon(
                         Icons.send,
-                        color: Colors.white,
+                        color: saffron,
                       ))
                 ],
               ),
@@ -143,7 +144,7 @@ class _ChatScreenState extends State<ChatScreen> {
     if (_isTyping) {
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
         content: TextWidget(
-          label: "You can't send multiple messages at a time",
+          label: "you can't send multiple messages at a time :(",
         ),
         backgroundColor: Colors.red,
       ));
@@ -152,7 +153,7 @@ class _ChatScreenState extends State<ChatScreen> {
     if (textEditingController.text.isEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
         content: TextWidget(
-          label: "Please type a message",
+          label: "please type a message :)",
         ),
         backgroundColor: Colors.red,
       ));

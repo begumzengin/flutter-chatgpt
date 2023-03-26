@@ -23,11 +23,6 @@ class MyApp extends StatelessWidget {
       child: MaterialApp(
         title: 'flutter & chatgpt',
         debugShowCheckedModeBanner: false,
-        theme: ThemeData(
-            scaffoldBackgroundColor: scaffoldBackgroundColor,
-            appBarTheme: AppBarTheme(
-              color: cardColor,
-            )),
         home: const ChatScreen(),
       ),
     );

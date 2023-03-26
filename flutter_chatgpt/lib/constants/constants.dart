@@ -4,6 +4,12 @@ import 'package:flutter_chatgpt/widgets/text_widget.dart';
 Color scaffoldBackgroundColor = const Color(0xFF343541);
 Color cardColor = const Color(0xFF444654);
 
+Color saffron = const Color(0xFFF59600);
+Color classicBlue = const Color(0xFF071A75);
+Color fadedDenim = const Color(0xFF5F83A7);
+Color orangePeel = const Color(0xFFF56600);
+Color sunlight = const Color(0xFFF2D593);
+
 /*
 List<String> models = [
   'Model1',

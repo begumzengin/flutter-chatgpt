@@ -16,7 +16,7 @@ class ChatWidget extends StatelessWidget {
     return Column(
       children: [
         Material(
-          color: chatIndex == 0 ? scaffoldBackgroundColor : cardColor,
+          color: chatIndex == 0 ? orangePeel : Color(0xFF052652),
           child: Padding(
             padding: const EdgeInsets.all(8.0),
             child: Row(
@@ -25,7 +25,7 @@ class ChatWidget extends StatelessWidget {
                 Image.asset(
                   chatIndex == 0
                       ? AssetsManager.userImage
-                      : AssetsManager.botImage,
+                      : AssetsManager.chatGhostinChat,
                   height: 30,
                   width: 30,
                 ),
@@ -37,8 +37,8 @@ class ChatWidget extends StatelessWidget {
                         ? TextWidget(label: msg)
                         : DefaultTextStyle(
                             style: TextStyle(
-                                color: Colors.white,
-                                fontWeight: FontWeight.w700,
+                                color: Color(0xFFF3F6E8),
+                                fontWeight: FontWeight.w500,
                                 fontSize: 16),
                             child: AnimatedTextKit(
                                 isRepeatingAnimation: false,

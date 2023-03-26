@@ -2,7 +2,6 @@ import 'dart:convert';
 import 'dart:developer';
 import 'dart:io';
 
-import 'package:flutter/material.dart';
 import 'package:flutter_chatgpt/constants/api_consts.dart';
 import 'package:flutter_chatgpt/models/chat_model.dart';
 import 'package:flutter_chatgpt/models/models_model.dart';
