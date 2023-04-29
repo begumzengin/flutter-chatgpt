@@ -8,6 +8,7 @@ import 'package:flutter_chatgpt/widgets/chat_widget.dart';
 import 'package:flutter_chatgpt/widgets/text_widget.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:provider/provider.dart';
+import 'package:speech_to_text/speech_to_text.dart' as stt;
 
 import '../providers/chats_provider.dart';
 import '../services/assets_manager.dart';
@@ -24,6 +25,32 @@ class _ChatScreenState extends State<ChatScreen> {
   late ScrollController _listScrollController;
   late TextEditingController textEditingController;
   late FocusNode focusNode;
+  //speech-to-text elements
+  late stt.SpeechToText _speech;
+  bool _isListening = false;
+  String _textSpeech = '';
+
+  void onListen() async {
+    if (!_isListening) {
+      bool available = await _speech.initialize(
+          onStatus: (val) => print('onStatus: $val'),
+          onError: (val) => print('onError: $val'));
+      if (available) {
+        setState(() {
+          _isListening = true;
+        });
+        _speech.listen(
+            onResult: (val) => setState(() {
+                  _textSpeech = val.recognizedWords;
+                }));
+      } else {
+        setState(() {
+          _isListening = false;
+          _speech.stop();
+        });
+      }
+    }
+  }
 
   @override
   void initState() {
@@ -31,6 +58,7 @@ class _ChatScreenState extends State<ChatScreen> {
     textEditingController = TextEditingController();
     focusNode = FocusNode();
     super.initState();
+    _speech = stt.SpeechToText();
   }
 
   @override
